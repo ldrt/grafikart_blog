@@ -151,6 +151,38 @@ body,html {
     margin: 0 0 15px 0;
 }
 
+.article-title::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 2px;
+    background-color: #000;
+}
+
+blockquote {
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    position: relative;
+}
+
+blockquote::before {
+    content: '“';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    font-size: 60px;
+    line-height: 1.4rem;
+}
+
+blockquote::after {
+    content: '”';
+    position: absolute;
+    bottom: -27px;
+    right: 5px;
+    font-size: 60px;
+    line-height: 1.4rem;
+}
+
 .sidebar {
     position: relative;
     width: 375px;
@@ -179,10 +211,32 @@ body,html {
     margin: 0;
     padding: 0;
     list-style: none;
+    counter-reset: sidebarlist;
 }
 
 .sidebar li {
     padding: 6px 0;
+}
+
+/* it's better to use an ol instead of ul
+but it's for testing counter */
+.sidebar li ::before{
+    counter-increment: sidebarlist;
+    content: counter(sidebarlist) ". ";
+}
+
+.sidebar .categories li a::after{
+    content: attr(data-count);
+    float: right;
+    background: grey;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    color: #FFF;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    font-weight: bold;
+    line-height: 25px;
 }
 
 .sidebar li:first-child {
